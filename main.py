@@ -41,7 +41,9 @@ class UserState(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def start(message):
-    await message.answer(f'Приветствуем в нашем боте! {message.from_user.username}', reply_markup=kb)
+    with open(f'files/welc.png', 'rb') as img:
+        await message.answer_photo(img,f'Приветствуем в нашем боте! {message.from_user.username}', reply_markup=kb)
+
 
 
 @dp.message_handler(text='Информация')
@@ -57,9 +59,9 @@ async def main_menu(message):
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
     for i, product in enumerate(get_all_products()):
-        await message.answer(f"Название:{product[1]} | Описание:{product[2]} | Цена: {product[3]}")
-        with open(f'files/vit{i + 1}.png', 'rb') as photo:
-            await message.answer_photo(photo)
+        await message.answer(f"Название:{product[0]} | Описание:{product[1]} | Цена: {product[2]}")
+        with open(f'files/vit{i + 1}.png', 'rb') as img:
+            await message.answer_photo(img)
 
     await message.answer("Выберите продукт для покупки:", reply_markup=kb_prod)
 
