@@ -13,6 +13,9 @@ def initiate_db():
     price TEXT
     )
     ''')
+# def get_all_products():
+#     curs.execute("SELECT FROM * Products")
+#     return curs.fetchall()
 
     products_data = [
         ('1', 'Product 1', ' Солгар натуральный растительный комплекс', '2139р'),
@@ -21,11 +24,5 @@ def initiate_db():
         ('4', 'Product 4', ' Солгар MULTI-ONE', '1888р')
     ]
     return curs.execute(f'INSERT INTO Products VALUES(?,?,?,?)', (products_data,))
-
-
-def get_all_products():
-    curs.execute("SELECT FROM * Products")
-    return curs.fetchall()
-
 # connect.commit()
 # connect.close()
