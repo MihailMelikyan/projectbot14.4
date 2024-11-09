@@ -7,8 +7,8 @@ import asyncio
 from dotenv import load_dotenv
 import os
 
-import db
-from db import *
+import crud_functions
+from crud_functions import *
 
 load_dotenv()
 api = os.getenv('API_TOKEN')
@@ -56,14 +56,12 @@ async def main_menu(message):
 
 @dp.message_handler(text='Купить')
 async def get_buying_list(message):
-    products = db.get_all_products()
-    i = 1
-    for product in products:
-        i += 1
-        with open(f'files/vit{i}.png', "rb") as img:
-            await message.answer_photo(img, f'Название: {product.title}  | Описание: :{product.description}'
-                                            f'|Цена:{product.price}')
-        await message.answer("Выберите продукт для покупки:", reply_markup=kb_prod)
+    for i, product in enumerate(get_all_products()):
+        await message.answer(f"Название:{product[1]} | Описание:{product[2]} | Цена: {product[3]}")
+        with open(f'files/vit{i + 1}.png', 'rb') as photo:
+            await message.answer_photo(photo)
+
+    await message.answer("Выберите продукт для покупки:", reply_markup=kb_prod)
 
 
 @dp.callback_query_handler(text='product_buying')
