@@ -13,6 +13,7 @@ from crud_functions import *
 load_dotenv()
 api = os.getenv('API_TOKEN')
 
+initiate_db()
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 kb = ReplyKeyboardMarkup()
