@@ -18,7 +18,9 @@ products_data = [
     ('3', 'Product 3', 'Солгар витамин C 500 mg', '1145 р'),
     ('4', 'Product 4', 'Солгар MULTI-ONE', '1888р')
 ]
-#curs.executemany('INSERT INTO Products VALUES(?,?,?,?)',products_data)
+
+#
+# curs.executemany('INSERT INTO Products VALUES(?,?,?,?)',products_data)
 
 
 def get_all_products():
@@ -26,5 +28,5 @@ def get_all_products():
     return curs.fetchall()
 
 
-connect.commit()
-connect.close()
+# connect.commit()
+# connect.close()
